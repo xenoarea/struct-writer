@@ -55,7 +55,7 @@ Defining the `persist` option makes the node discardable. The given promise for 
 
 
 ## Crawl options
-
+```
 {
     adaptNode: (item) => item,                  // If you provide something else than a promise/function as node of
                                                 // the schema, provide an adaptNode function to transform into in one.
@@ -72,3 +72,4 @@ Defining the `persist` option makes the node discardable. The given promise for 
                                                 // option of the schema, provide an adaptPersistOption function to
                                                 // transform it into one.
 }
+```
