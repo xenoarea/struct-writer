@@ -73,3 +73,9 @@ Defining the `persist` option makes the node discardable. The given promise for 
                                                 // transform it into one.
 }
 ```
+
+## Find me on
+
+- [Twitch](https://www.twitch.tv/xenoarea)
+- [Twitter](https://twitter.com/xenoarea)
+- [Instagram](https://www.instagram.com/xenoarea)
