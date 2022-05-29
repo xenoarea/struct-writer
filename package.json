@@ -1,0 +1,36 @@
+{
+  "name": "@xenoarea/object-resolver",
+  "version": "0.0.0",
+  "description": "Little helper to generate complex object from a schema filling values in from promises resolution",
+  "main": "./src/createObjectResolver.js",
+  "type": "module",
+  "scripts": {
+    "doc": "jsdoc2md --files \"src/createObjectResolver.js\" > doc/createObjectResolver.md",
+    "lint": "standard \"src/**/!(*.test).js\"",
+    "lint-fix": "npm run lint -- --fix",
+    "prepare": "husky install",
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xenoarea/object-resolver.git"
+  },
+  "keywords": [
+    "prompt",
+    "prompting",
+    "object",
+    "promise"
+  ],
+  "author": "XenoArea <xenoarea@protonmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xenoarea/object-resolver/issues"
+  },
+  "homepage": "https://github.com/xenoarea/object-resolver#readme",
+  "devDependencies": {
+    "ava": "^4.2.0",
+    "husky": "^8.0.1",
+    "jsdoc-to-markdown": "^7.1.1",
+    "standard": "^17.0.0"
+  }
+}
