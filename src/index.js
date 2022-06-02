@@ -23,74 +23,44 @@ const list = [
 
 const nodeFunction = createValueResolver(() => Math.random())
 
-let count0 = 0
 let count1 = 0
-let count2 = 0
-
-const nodeRepeatOption0 = createValueResolver(() => {
-    count1 = 0
-    return ++count0 < 2
-})
-
-const nodeOptions0 = {
-    repeat: nodeRepeatOption0
-}
 
 const nodeRepeatOption1 = createValueResolver(() => {
-    count2 = 0
-    return ++count1 < 3
+    return ++count1 < 4
 })
 
 const nodeOptions1 = {
     repeat: nodeRepeatOption1
 }
 
+let count2 = 0
+
 const nodeRepeatOption2 = createValueResolver(() => {
-    return ++count2 < 4
+    count1 = 0
+    return ++count2 < 2
 })
 
 const nodeOptions2 = {
     repeat: nodeRepeatOption2
 }
 
+let count3 = 0
+
+const nodeRepeatOption3 = createValueResolver(() => {
+    count2 = 0
+    return ++count3 < 2
+})
+
+const nodeOptions3 = {
+    repeat: nodeRepeatOption3
+}
+
+
 //[[[x,x,x,x], [x,x,x,x], [x,x,x,x]], [[x,x,x,x], [x,x,x,x], [x,x,x,x]]]
 
-const schema = [[[nodeFunction, nodeOptions2], nodeOptions1], nodeOptions0]
+const schema = [[[nodeFunction, nodeOptions1], nodeOptions2], nodeOptions3]
+//const schema = [nodeFunction, nodeOptions1]
 
 const result = await resolveObject(schema)
 
 console.log('result', result)
-
-
-node [{"key":null,"isRepeated":true, isNew: true}]
-node [{"key":null,"isRepeated":true, isNew: true },{"key":null,"isRepeated":true, isNew: true}]
-function [{"key":null,"isRepeated":true, isNew: true },{"key":null,"isRepeated":true, isNew: true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true, isNew: false },{"key":null,"isRepeated":true, isNew: false},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true, isNew: false },{"key":null,"isRepeated":true, isNew: false},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true, isNew: false },{"key":null,"isRepeated":true, isNew: false},{"key":null,"isRepeated":true}]
-node [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-node [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-node [{"key":null,"isRepeated":true}]
-node [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-node [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-node [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
-function [{"key":null,"isRepeated":true},{"key":null,"isRepeated":true},{"key":null,"isRepeated":true}]
