@@ -54,6 +54,7 @@ The keypath provided as second parameter to the `write` function is an array of 
 
 ## Key segment
 
+```
 {
   key: string           // key of the entry in the structure being created.
 
@@ -68,6 +69,7 @@ The keypath provided as second parameter to the `write` function is an array of 
                         // if update is set to false (or not defined), the index will determine at which position
                         // the item will be inserted in the array entry.
 }
+```
 
 ## Find me on
 
