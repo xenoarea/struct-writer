@@ -46,9 +46,9 @@ function write (value, keyPath = [], base) {
 
     const [keySegment, ...nextKeyPath] = keyPath
 
-    const { key, isArray, update, index } = harmonizeKeySegment(keySegment)
+    const { key, array, update, index } = harmonizeKeySegment(keySegment)
 
-    if (!isArray) {
+    if (!array) {
         const nextValue = write(
             value,
             nextKeyPath,

@@ -27,23 +27,23 @@ const struct2 = write('Hi', ['field1', 'field2', 'field4'], struct1)
 console.log(struct2)
 // output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' } } }
 
-const struct3 = write('Cheers', ['field1', { key: 'field6', isArray: true }], struct2)
+const struct3 = write('Cheers', ['field1', { key: 'field6', array: true }], struct2)
 console.log(struct3)
 // output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Cheers'] } }
 
-const struct4 = write('Hoy', ['field1', { key: 'field6', isArray: true, index: 0 }], struct3)
+const struct4 = write('Hoy', ['field1', { key: 'field6', array: true, index: 0 }], struct3)
 console.log(struct4)
 // output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Hoy', 'Cheers'] } }
 
-const struct5 = write('Allo', ['field1', { key: 'field6', isArray: true, update: true, index: 0 }], struct4)
+const struct5 = write('Allo', ['field1', { key: 'field6', array: true, update: true, index: 0 }], struct4)
 console.log(struct5)
 // output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Allo', 'Cheers'] } }
 
-const struct6 = write('Salut', ['field1', { key: 'field6', isArray: true }, 'field7'], struct5)
+const struct6 = write('Salut', ['field1', { key: 'field6', array: true }, 'field7'], struct5)
 console.log(struct6)
 // output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Allo', 'Cheers', { field7: 'Salut' }] } }
 
-const struct7 = write('Good morning', ['field1', { key: 'field6', isArray: true, update: true }, 'field8'], struct6)
+const struct7 = write('Good morning', ['field1', { key: 'field6', array: true, update: true }, 'field8'], struct6)
 console.log(struct7)
 // output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Allo', 'Cheers', { field7: 'Salut', fiels8: 'Good morning' }] } }
 ```
@@ -58,7 +58,7 @@ The keypath provided as second parameter to the `write` function is an array of 
 {
   key: string           // key of the entry in the structure being created.
 
-  isArray: boolean      // set to true to make the entry an array in the structure being created.
+  array: boolean        // set to true to make the entry an array in the structure being created.
 
   update: boolean       // set to true to update an item of the array entry in the structure being created.
                         // If no index given, the last item will be updated.
