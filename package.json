@@ -1,11 +1,11 @@
 {
-  "name": "@xenoarea/object-resolver",
+  "name": "@xenoarea/struct-writer",
   "version": "0.0.0",
-  "description": "Little helper to generate complex object from a schema filling values in from promises resolution",
-  "main": "./src/createObjectResolver.js",
+  "description": "Function to write complex structures (obj, array) from keypath",
+  "main": "./src/write.js",
   "type": "module",
   "scripts": {
-    "doc": "jsdoc2md --files \"src/createObjectResolver.js\" > doc/createObjectResolver.md",
+    "doc": "jsdoc2md --files \"src/write.js\" > doc/write.md",
     "lint": "standard \"src/**/!(*.test).js\"",
     "lint-fix": "npm run lint -- --fix",
     "prepare": "husky install",
@@ -13,20 +13,23 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xenoarea/object-resolver.git"
+    "url": "git+https://github.com/xenoarea/struct-writer.git"
   },
   "keywords": [
-    "prompt",
-    "prompting",
+    "struct",
+    "array",
     "object",
-    "promise"
+    "setter",
+    "set",
+    "write",
+    "keypath"
   ],
   "author": "XenoArea <xenoarea@protonmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/xenoarea/object-resolver/issues"
+    "url": "https://github.com/xenoarea/struct-writer/issues"
   },
-  "homepage": "https://github.com/xenoarea/object-resolver#readme",
+  "homepage": "https://github.com/xenoarea/struct-writer#readme",
   "devDependencies": {
     "ava": "^4.2.0",
     "husky": "^8.0.1",

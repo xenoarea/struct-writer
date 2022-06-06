@@ -1,78 +1,73 @@
-# object-promiser
-Little helper to generate complex object from a schema filling values in from promises resolution
+# struct-writer
+Function to write complex structures (obj, array) from keypath
 
 ## Installation
 
-npm install --save @xenoarea/object-promiser
+npm install --save @xenoarea/struct-writer
 
 ## Philosophy
 
-Originally I was writing a generator for Yeoman that was prompting user inputs in loop, with prompting containing
-nested prompting loop. I finally ended up writing this little helper to make it easy.
+I was originally developing another package in which I needed to sequentially rewrite a state object, with nested keys and arrays.
+In order to do this I created that function that I then decided to isolate in its own package.
 
 ## Usage
 
 ```
-import createObjectPromiser from '@xenoarea/object-promiser'
+import write from '@xenoarea/struct-writer'
 
-const crawl = createObjectPromiser()
+const struct0 = write('Hello world !')
+console.log(struct0)
+// output: Hello world !
 
-const schema = {}
+const struct1 = write('Hello there !', ['field1', 'field2', 'field3'])
+console.log(struct1)
+// output: { field1: { field2: { field3: 'Hello there !' } } }
 
-const answers = await crawl(schema)
+const struct2 = write('Hi', ['field1', 'field2', 'field4'], struct1)
+console.log(struct2)
+// output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' } } }
+
+const struct3 = write('Cheers', ['field1', { key: 'field6', isArray: true }], struct2)
+console.log(struct3)
+// output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Cheers'] } }
+
+const struct4 = write('Hoy', ['field1', { key: 'field6', isArray: true, index: 0 }], struct3)
+console.log(struct4)
+// output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Hoy', 'Cheers'] } }
+
+const struct5 = write('Allo', ['field1', { key: 'field6', isArray: true, update: true, index: 0 }], struct4)
+console.log(struct5)
+// output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Allo', 'Cheers'] } }
+
+const struct6 = write('Salut', ['field1', { key: 'field6', isArray: true }, 'field7'], struct5)
+console.log(struct6)
+// output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Allo', 'Cheers', { field7: 'Salut' }] } }
+
+const struct7 = write('Good morning', ['field1', { key: 'field6', isArray: true, update: true }, 'field8'], struct6)
+console.log(struct7)
+// output: { field1: { field2: { field3: 'Hello there !', field4: 'Hi' }, field6: ['Allo', 'Cheers', { field7: 'Salut', fiels8: 'Good morning' }] } }
 ```
 
-## Schema node options
+## Keypath
 
-When you define a node of your schema, you can attach it some options to make it optional, repeatable of discardable like following
+The keypath provided as second parameter to the `write` function is an array of key segments. A key segment can be a string, in that case it will be used as a key for the structure being created or an object defining some options to create and manipulate array in the structure being created.
 
-```
-const itemsOptions = {
-    include: async () => true|false,
-    repeat: async () => true|false,
-    persist: async () => true|false
-}
+## Key segment
 
-const itemsPromise = async () => (...)
-
-const schema {
-  items: [itemsPromise, itemsOptions]
-}
-```
-
-### Include
-
-Defining the `include` option make the node optional. If the given promise for the `include` option returns false, the node promise will be skipped. If it returns true
-it will be resolved.
-
-### Repeat
-
-Defining the `repeat` option makes the node repeated (it then becomes an array in your resulting object structure). The given promise for the `repeat` option is called after each node resolution. If it returns false it stops repeating. If it returns true it will repeat it one more time and reresolve just after.
-
-### Persist node
-
-Defining the `persist` option makes the node discardable. The given promise for the `persist` option is called after each node resolution (before repeat). If it returns false the node resolved value is discarded. If it returns the node resolved value is kept into the resulting object.
-
-
-## Crawl options
-```
 {
-    adaptNode: (item) => item,                  // If you provide something else than a promise/function as node of
-                                                // the schema, provide an adaptNode function to transform into in one.
-                                                
-    adaptIncludeOption: (item) => item,         // If you provide something else than a promise/function as include
-                                                // option of the schema, provide an adaptIncludeOption function to
-                                                // transform it into one.
-                                                
-    adaptRepeatOption: (item) => item,          // If you provide something else than a promise/function as repeat
-                                                // option of the schema, provide an adaptRepeatOption function to
-                                                // tranform it into one.
+  key: string           // key of the entry in the structure being created.
 
-    adaptPersistOption: (item) => item          // If you provide something else than a promise/function as persist
-                                                // option of the schema, provide an adaptPersistOption function to
-                                                // transform it into one.
+  isArray: boolean      // set to true to make the entry an array in the structure being created.
+
+  update: boolean       // set to true to update an item of the array entry in the structure being created.
+                        // If no index given, the last item will be updated.
+                        // set to false (or do not define) to perform an insertion in the array entry.
+                        // If no index given, the new item will be added at the end of the array.
+
+  index: integer        // if update is set to true, the index will determine which item will be updated.
+                        // if update is set to false (or not defined), the index will determine at which position
+                        // the item will be inserted in the array entry.
 }
-```
 
 ## Find me on
 
